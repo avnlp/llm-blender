@@ -1,0 +1,198 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llm-blender"
+dynamic = ["version"]
+description = 'Ensembling LLMs using LLM-Blender'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = ["LLM-Blender", "Ensemble", "RAG", "Rankers"]
+authors = [
+  { name = "Ashwin Mathur", email = "" },
+  { name = "Varun Mathur", email = "" },
+]
+maintainers = [
+  { name = "Ashwin Mathur", email = "" },
+  { name = "Varun Mathur", email = "" },
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "License :: Freely Distributable",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "typing_extensions",
+  "haystack-ai",
+  "llama-cpp-haystack",
+  "absl-py",
+  "transformers",
+  "torch",
+  "numpy",
+  "accelerate",
+  "safetensors",
+  "dataclasses-json",
+  "sentencepiece",
+  "protobuf",
+  "datasets",
+  "pycocoevalcap",
+  "spacy",
+  "prettytable",
+  "evaluate",
+  "bert_score",
+  "tabulate",
+  "scipy",
+  "nltk",
+  "scikit-learn",
+  "sacrebleu",
+  "rouge_score",
+]
+
+
+[project.urls]
+Documentation = "https://github.com/avnlp/llm-blender#readme"
+Issues = "https://github.com/avnlp/llm-blender/issues"
+Source = "https://github.com/avnlp/llm-blender"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_blender"]
+
+[tool.hatch.version]
+path = "src/llm_blender/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = ["coverage[toml]>=6.5", "coveralls", "pytest"]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = ["- coverage combine", "coverage xml"]
+cov = ["test-cov", "cov-report"]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10"]
+
+[tool.hatch.envs.lint]
+detached = true
+dependencies = ["black>=23.1.0", "mypy>=1.0.0", "ruff>=0.0.243"]
+
+[tool.hatch.envs.lint.scripts]
+typing = "mypy --install-types --non-interactive {args:src/llm_blender tests}"
+style = ["ruff check {args:.}", "black --check --diff {args:.}"]
+fmt = ["black {args:.}", "ruff check --fix --unsafe-fixes {args:.}", "style"]
+all = ["fmt", "typing"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.black]
+target-version = ["py37"]
+line-length = 120
+skip-string-normalization = true
+
+[tool.ruff]
+target-version = "py37"
+line-length = 120
+lint.select = [
+  "A",
+  "ARG",
+  "B",
+  "C",
+  "DTZ",
+  "E",
+  "EM",
+  "F",
+  "FBT",
+  "I",
+  "ICN",
+  "ISC",
+  "N",
+  "PLC",
+  "PLE",
+  "PLR",
+  "PLW",
+  "Q",
+  "RUF",
+  "S",
+  "T",
+  "TID",
+  "UP",
+  "W",
+  "YTT",
+]
+lint.ignore = [
+  # Allow non-abstract empty methods in abstract base classes
+  "B027",
+  # Allow boolean positional values in function calls, like `dict.get(... True)`
+  "FBT003",
+  # Ignore checks for possible passwords
+  "S105",
+  "S106",
+  "S107",
+  # Ignore complexity
+  "C901",
+  "PLR0911",
+  "PLR0912",
+  "PLR0913",
+  "PLR0915",
+  # Ignore print statements
+  "T201",
+]
+lint.unfixable = [
+  # Don't touch unused imports
+  "F401",
+]
+exclude = ["src/llm_blender/llm_blender_utils/"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["llm_blender"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.per-file-ignores]
+# Tests can use magic values, assertions, and relative imports
+"tests/**/*" = ["PLR2004", "S101", "TID252"]
+
+[tool.coverage.run]
+source_pkgs = ["llm_blender", "tests"]
+branch = true
+parallel = true
+omit = ["src/llm_blender/__about__.py", "examples"]
+
+[tool.coverage.paths]
+llm_blender = ["src/llm_blender", "*/llm_blender/src/llm_blender"]
+tests = ["tests", "*llm_blender/tests"]
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-vv"
+markers = ["unit: unit tests", "integration: integration tests"]
+
+[tool.mypy]
+ignore_missing_imports = true
+exclude = ["src/llm_blender/llm_blender_utils/.*"]
+
+[[tool.mypy.overrides]]
+module = [
+  "haystack.*",
+  "pytest.*",
+  "llm_blender.llm_blender_utils.*",
+  "llm_blender.llm_blender_evaluator.*",
+]
+ignore_missing_imports = true
+ignore_errors = true
