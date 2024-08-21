@@ -80,7 +80,9 @@ print(ranked_answers)
 # ]
 ```
 
-The API documentation can be found [here](src/llm_blender/README.md).
+The detailed documentation can be found in the [LLM-Blender API Reference](src/llm_blender/README.md).
+
+As the [`llm-blender` library](https://github.com/yuchenlin/LLM-Blender) lacks a stable release, the necessary code has been incorporated into this project under `src/llm_blender/llm_blender_utils`.
 
 ## Results
 
