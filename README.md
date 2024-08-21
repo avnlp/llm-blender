@@ -84,6 +84,7 @@ The detailed documentation can be found in the [LLM-Blender API Reference](src/l
 
 As the [`llm-blender` library](https://github.com/yuchenlin/LLM-Blender) lacks a stable release, the necessary code has been incorporated into this project under `src/llm_blender/llm_blender_utils`.
 
+
 ## Results
 
 - A custom component, `LLMBlenderPairRanker`, was developed to integrate the LLM-Blender Framework with Haystack Pipelines. Haystack RAG Pipelines with the LLM-Blender component to ensemble LLMs were evaluated. The pipelines were evaluated on the BillSum and MixInstruct datasets using three metrics: BARTScore, BLEURT, and BERTScore.
