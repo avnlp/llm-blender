@@ -1,5 +1,7 @@
 # LLM-Blender
 
+**Paper:** [LLM Ensembling: Haystack Pipelines with LLM-Blender](paper/llm_blender.pdf)
+
 - LLM-Blender is an ensembling framework designed to achieve consistently superior performance by combining the outputs of multiple language models (LLMs). This work focuses on integrating LLM-Blender with Retrieval-Augmented Generation (RAG) pipelines to significantly improve the quality of generated text.
 
 - LLM-Blender is a two-stage ensemble learning framework. In the first stage (ranking), pairwise comparison of candidates is performed, and they are then ranked. In the second stage (fusing), the top K candidates are merged to render the final output.
