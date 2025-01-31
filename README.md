@@ -1,4 +1,4 @@
-# LLM-Blender
+# LLM Ensembling: Pipelines with LLM-Blender
 
 **Paper:** [LLM Ensembling: Haystack Pipelines with LLM-Blender](paper/llm_blender.pdf)
 
