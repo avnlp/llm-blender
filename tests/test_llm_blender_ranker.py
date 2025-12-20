@@ -37,7 +37,7 @@ class TestLLMBlenderRanker:
         ]
 
         assert llm_ranker.model is None
-        with pytest.raises(ComponentError, match="The component LLMBlenderRanker wasn't warmed up."):
+        with pytest.raises(ComponentError, match=r"The component LLMBlenderRanker wasn't warmed up."):
             llm_ranker.run(answers=[answers])
 
         llm_ranker.warm_up()
