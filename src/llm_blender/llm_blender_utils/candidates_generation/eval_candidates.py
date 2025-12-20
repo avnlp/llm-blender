@@ -1,18 +1,12 @@
 """
-    Eval results will be continuously saved to ../../data/prepared/{dataset_name}/{set_name}/dataset.jsonl
+Eval results will be continuously saved to ../../data/prepared/{dataset_name}/{set_name}/dataset.jsonl
 """
 
 import argparse
-import json
 import os
-import random
 import sys
-from collections import defaultdict
 
 import numpy as np
-import psutil
-import tabulate
-from tqdm import tqdm
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
