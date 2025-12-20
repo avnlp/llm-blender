@@ -1,7 +1,7 @@
 """
-    This file is taken from This file is modified based on:
-    https://github.com/Ravoxsg/SummaReranker-ACL-22-/blob/main/src/candidate_generation/engine.py
-    We thank the authors for sharing their code.
+This file is modified based on:
+https://github.com/Ravoxsg/SummaReranker-ACL-22-/blob/main/src/candidate_generation/engine.py
+We thank the authors for sharing their code.
 """
 
 import gc
