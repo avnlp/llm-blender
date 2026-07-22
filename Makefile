@@ -10,7 +10,7 @@ help:
 	@echo "  make lint-typing   - Type check with mypy"
 	@echo "  make lint-style    - Check Ruff and Black formatting"
 	@echo "  make lint-fmt      - Format with Black and apply Ruff fixes"
-	@echo "  make lint-all      - Format, lint, and type check"
+	@echo "  make lint-all      - Check style and type check (CI gate, read-only)"
 	@echo "  make build         - Build wheel and source distributions"
 	@echo "  make publish       - Publish distributions with uv"
 
@@ -41,7 +41,7 @@ lint-fmt:
 	uv run ruff check --fix --unsafe-fixes .
 	$(MAKE) lint-style
 
-lint-all: lint-fmt lint-typing
+lint-all: lint-style lint-typing
 
 build:
 	uv build
