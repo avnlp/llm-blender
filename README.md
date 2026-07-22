@@ -38,19 +38,18 @@ The results from the different LLMs on the MixInstruct dataset are ranked and co
 ## Usage
 
 To run the pipelines, you will need to clone this repository and install the required libraries.
-Install the llm-blender package:
+Sync the project and its development dependencies:
 
 ```bash
 git clone https://github.com/avnlp/llm_blender
 cd llm_blender
-pip install -e .
+make sync
 ```
 
 ## LLM-Blender using Mistral, LLama-3 and Phi-3 models on the MixInstruct Dataset
 
 ``` python
-cd src/llm_blender/mix_instruct/
-python llm_blender_ranker_all_llms.py
+uv run python src/llm_blender/mix_instruct/llm_blender_ranker_all_llms.py
 ```
 
 ## LLMBlenderRanker Component Usage
